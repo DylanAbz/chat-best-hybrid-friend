@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, Alert, BackHandler } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { useAudioPlayer } from 'expo-audio';
 import * as Battery from 'expo-battery';
 import * as Brightness from 'expo-brightness';
 
@@ -10,6 +11,9 @@ export default function HomeScreen() {
     const [showChat, setShowChat] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
 
+    // --- Hook audio pour le chat ---
+    const chatPlayer = useAudioPlayer(require('../../assets/sounds/meow.mp3'));
+
     // --- Batterie & luminosité ---
     useEffect(() => {
         const getBatteryLevel = async () => {
@@ -17,6 +21,7 @@ export default function HomeScreen() {
             if (level !== null) setBackgroundColor(level > 0.5 ? '#A1CEDC' : '#FA8072');
         };
         getBatteryLevel();
+
         const batterySubscription = Battery.addBatteryLevelListener(({ batteryLevel }) => {
             setBackgroundColor(batteryLevel > 0.5 ? '#A1CEDC' : '#FA8072');
         });
@@ -31,23 +36,39 @@ export default function HomeScreen() {
     }, []);
 
     // --- Fonctions menu ---
-    const handleOptionChange = async (value: string) => {
+    const handleChat = () => {
+        setShowChat(true);
+        setDogImage(null);
+        chatPlayer.seekTo(0); // remet le son au début
+        chatPlayer.play();    // joue le son
+    };
+
+    const handleDog = async () => {
+        setShowChat(false);
+        try {
+            const response = await fetch('https://dog.ceo/api/breeds/image/random');
+            const data = await response.json();
+            setDogImage(data.message);
+        } catch (err) {
+            Alert.alert('Erreur', 'Impossible de récupérer l\'image du chien.');
+        }
+    };
+
+    const handleQuit = () => {
+        BackHandler.exitApp();
+    };
+
+    const handleOptionChange = (value: string) => {
+        if (!value) return;
+
         setSelectedOption(value);
 
         if (value === 'Chat') {
-            setShowChat(true);
-            setDogImage(null);
+            handleChat();
         } else if (value === 'Dog') {
-            setShowChat(false);
-            try {
-                const response = await fetch('https://dog.ceo/api/breeds/image/random');
-                const data = await response.json();
-                setDogImage(data.message);
-            } catch (err) {
-                Alert.alert('Erreur', 'Impossible de récupérer l\'image du chien.');
-            }
+            handleDog();
         } else if (value === 'Quit') {
-            BackHandler.exitApp();
+            handleQuit();
         }
     };
 
