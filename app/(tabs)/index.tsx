@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Alert, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, Image, Alert, BackHandler, Linking } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useAudioPlayer } from 'expo-audio';
 import * as Battery from 'expo-battery';
@@ -45,12 +45,30 @@ export default function HomeScreen() {
 
     const handleDog = async () => {
         setShowChat(false);
+
+        // --- Récupérer l'image du chien ---
         try {
             const response = await fetch('https://dog.ceo/api/breeds/image/random');
             const data = await response.json();
             setDogImage(data.message);
         } catch (err) {
             Alert.alert('Erreur', 'Impossible de récupérer l\'image du chien.');
+        }
+
+        // --- Préparer le SMS ---
+        const phoneNumber = '0606060606';
+        const message = "Je n'aime pas les chats";
+        const url = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+
+        try {
+            const supported = await Linking.canOpenURL(url);
+            if (supported) {
+                await Linking.openURL(url);
+            } else {
+                Alert.alert('Erreur', 'Impossible d\'ouvrir l\'application SMS sur cet appareil.');
+            }
+        } catch (err) {
+            Alert.alert('Erreur', 'Une erreur est survenue en ouvrant l\'application SMS.');
         }
     };
 
