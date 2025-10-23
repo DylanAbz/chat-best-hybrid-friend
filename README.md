@@ -2,6 +2,8 @@
 
 Ceci est un projet [Expo](https://expo.dev) créé avec [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+N'ayant pas eu le temps et préférant rendre un projet propre, ce repo n'a qu'une seule branche "main".
+
 ## Contenu de l'application
 Le TP "Chat is my best hybrid friend" avait pour objectif de créer une application mobile hybride avec l'aide de ChatGPT. Le développeur ne pouvait pas réaliser de ligne de code dans ce projet. L'application contient les fonctionnalités suivantes : 
 
