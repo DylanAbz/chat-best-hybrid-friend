@@ -1,50 +1,51 @@
-# Welcome to your Expo app 👋
+# TP : Chat is my best hybrid friend 
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Ceci est un projet [Expo](https://expo.dev) créé avec [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+## Contenu de l'application
+Le TP "Chat is my best hybrid friend" avait pour objectif de créer une application mobile hybride avec l'aide de ChatGPT. Le développeur ne pouvait pas réaliser de ligne de code dans ce projet. L'application contient les fonctionnalités suivantes : 
 
-1. Install dependencies
+Onglet "Accueil" :
+- Fond d'écran selon la batterie du téléphone
+- Luminosité automatique 
+- Menu déroulant permettant de choisir entre chat, chien, clicker et quitter
+- Chat : Affiche une image de chat et un son de miaulement
+- Chien : Affiche une image de chien aléatoire
+- Clicker : Un compteur du nombre de clics sur chats et chiens
+- Quitter : Ferme l'application (Android uniquement)
+
+Onglet "Carte" :
+- Affiche une carte
+- La carte est centrée pour pouvoir visualiser Paris et Toulon
+
+---
+## Lancer le projet
+
+1. Installer les dépendances
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Lancer l'application
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+--- 
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Structure du projet
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Voici un aperçu de la structure du projet :
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+my-hybrid-friend/
+├── assets/                 # Ressources statiques (images, polices, etc.)
+├── app/                    # Code source de l'application
+    ├── (tabs)/             # Les onglets de l'application
+├── package.json            # Dépendances et scripts du projet
+├── app.json                # Configuration de l'application Expo
+└── README.md               # Documentation du projet
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
